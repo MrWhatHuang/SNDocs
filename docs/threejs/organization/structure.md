@@ -2,18 +2,18 @@
 
     WISDOM_UI
       node_modules
-         three 核心依赖包
+         three ------------------------------------- 核心依赖包
       src
         assets
-          threeJsLib
+          threeJsLib ------------------------------- 封装的api库
         components
-          ThreeMap
-          threeMapDialog
+          ThreeMap --------------------------------- 适应业务对api库的一些调用及数据处理
+          threeMapDialog --------------------------- 倾斜摄影建筑分层时threejs配合展示室内的弹框
         views
-          map
+          map -------------------------------------- 地图展示主体
       static
-        3DModels
+        3DModels ----------------------------------- 放置3D模型
         config
-          index.js
+          index.js --------------------------------- 对地图的一些配置
 
           

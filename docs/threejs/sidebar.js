@@ -3,7 +3,8 @@ module.exports = [
     title: '项目组织',
     collapsable: true,
     children: [
-      '/threejs/organization/structure'
+      '/threejs/organization/structure',
+      '/threejs/organization/threeJsLib'
     ]
   }, {
     title: 'API',
