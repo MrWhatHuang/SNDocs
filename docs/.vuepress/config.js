@@ -7,6 +7,9 @@ module.exports = {
     sidebar: require('./sidebar.js'),
     sidebarDepth: 2
   },
+  markdown: {
+    lineNumbers: true
+  },
   configureWebpack: {
     resolve: {
       alias: {
