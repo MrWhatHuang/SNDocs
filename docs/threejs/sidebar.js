@@ -24,5 +24,15 @@ module.exports = [
       '/threejs/api/opacity',
       '/threejs/api/others'
     ]
+  }, {
+    title: '功能实现',
+    collapsable: true,
+    children: [
+      '/threejs/function/trackFun',
+      '/threejs/function/selectPointFun',
+      '/threejs/function/modelLoadFun',
+      '/threejs/function/buildSplit',
+      '/threejs/function/buildOpacity'
+    ]
   }
 ]
