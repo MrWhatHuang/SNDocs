@@ -2,7 +2,7 @@
 
 ## 1、请求数据
 
-代码文件 `@/src/views/map/pages/pos/targetFollow.vue`
+**代码文件** `@/src/views/map/pages/pos/targetFollow.vue`
 
 ```javascript
 async handleSearch (imPlay) {
@@ -34,7 +34,7 @@ async handleSearch (imPlay) {
 
 ## 2、处理轨迹数据并开启建筑可选
 
-代码文件 `@/src/views/map/pages/index.vue`
+**代码文件** `@/src/views/map/pages/index.vue`
 
 ```javascript
 initTrack (dataList, type, object) { // 加载轨迹
@@ -95,7 +95,7 @@ obj => {
 
 ## 3、在地图绘制轨迹并缓存轨迹数据
 
-代码文件 `@/src/assets/threeJsLib/threeApp.js`
+**代码文件** `@/src/assets/threeJsLib/threeApp.js`
 
 ```javascript
 let trackListChache = [];
@@ -117,7 +117,7 @@ this.initTrack = function(index, trackList, id, text, base64) {
 
 调用上面的函数后会发现地图上其实只出现了一个轨迹对象的图标，这是因为还没告诉地图需要呈现到什么时间节点的轨迹，默认只绘制出轨迹的第一个点，目前是通过一个间隔时长为一秒的循环定时器去刷新轨迹的时间节点。
 
-代码文件 `@/src/views/map/pages/pos/targetFollow.vue`
+**代码文件** `@/src/views/map/pages/pos/targetFollow.vue`
 
 ```javascript
 startShowHistory () { // 地图展示轨迹
@@ -129,7 +129,7 @@ startShowHistory () { // 地图展示轨迹
 }
 ```
 
-代码文件 `@/src/views/map/pages/index.vue`
+**代码文件** `@/src/views/map/pages/index.vue`
 
 ```javascript
 updateTrackDataIndex (index) { // 更新轨迹播放进度

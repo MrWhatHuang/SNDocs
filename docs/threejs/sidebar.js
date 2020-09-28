@@ -32,7 +32,8 @@ module.exports = [
       '/threejs/function/selectPointFun',
       '/threejs/function/modelLoadFun',
       '/threejs/function/buildSplit',
-      '/threejs/function/buildOpacity'
+      '/threejs/function/buildOpacity',
+      '/threejs/function/mulCompany'
     ]
   }
 ]

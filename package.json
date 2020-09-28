@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "eject": "vuepress eject press DONE Copied default theme into /Users/macpc/Documents/项目/three_doc/press/.vuepress/theme."
   },
   "author": "",
   "license": "ISC",

@@ -35,6 +35,116 @@
 
 地图底图和所有业务弹框
 
+目录结构
+
+![mapPages](/img/threejs/mapPages.png "mapPages")
+
+根据各个模块对所有弹框进行了分类，分别是 pos、process、risk、sou 还有个 tools 文件夹存放一些配置类的页面比如标记相机和选点组件等
+
+### contentNext.vue
+
+该页面挂载所有弹框组件，并集中调度他们的显示与隐藏，为了避免页面篇幅太大用到了一个动态组件注册。
+
+- 首先循环遍历文件夹下的所有.vue 文件并以组件形式注册到该页面
+
+```javascript
+importCommponent () {
+  // 注册子组件
+  let _this = this
+  const requireComponents = require.context('.', true, /\.vue$/)
+  // 遍历出每个组件的路径
+  requireComponents.keys().forEach(fileName => {
+    // 组件实例
+    const reqCom = requireComponents(fileName)
+    let path = fileName.split('/')
+    if (path.length > 2) {
+      // 截取路径作为组件名
+      const reqComName = path[path.length - 1].replace('.vue', '')
+      // 组件挂载
+      _this.constructor.component(reqComName, reqCom.default || reqCom)
+    }
+  })
+}
+```
+
+- 在 data 里面声明弹框名称和所在方位
+
+```json
+dialogs: [
+  { name: 'targetFollow', position: 'left-small' },
+  { name: 'history', position: 'left-small' },
+  { name: 'personSpread', position: 'left' },
+  { name: 'personList', position: 'right' },
+  ...
+]
+```
+
+- 最后在 `template` 标签内以 `component` 标签的形式循环渲染出来
+
+```html
+<message-box-mix
+  v-for="(item, index) in dialogs"
+  :key="index"
+  :type="item.position"
+  v-model="comVisible[item.name + 'Visible']"
+  :showVisible="showVisible[item.name + 'Visible']"
+  :style="'top:'+item.offset+'px;'+'transition:'+(item.transition?' top 1s ease 0s;':';')"
+>
+  <component :is="item.name" :ref="item.name"></component>
+</message-box-mix>
+```
+
+### index.vue
+
+加载两个地图和上面的弹框组件页 [contentNext.vue](/threejs/organization/map/#contentnext-vue)
+
+```html
+<template>
+  <div class="map-page-container">
+    <!--报警铃声-->
+    <audio
+      id="myAudio"
+      ref="myAudio"
+      :src="require('@/assets/video/alarm.mp3')"
+      preload="load"
+      controls="controls"
+      loop="true"
+      hidden="true"
+    ></audio>
+    <div class="map-container">
+      <!------------地图中间页------------>
+      <map-content ref="mapContent" :comegoList="comegoList"></map-content>
+      <!-- ---------cesium地图加载--------- -->
+      <cesium-map
+        v-if="$parent.isShowMapType === '1'"
+        :personDistributionData="personDistributionData"
+        @gisloadEnd="gisloadEnd"
+        @clickObject="clickObject"
+        class="map-content"
+        ref="cesiumMap"
+      ></cesium-map>
+      <!-- ---------threejs地图加载--------- -->
+      <three-map
+        v-else
+        cameraType="orthographic"
+        ref="threeMap"
+        @loaded="mapLoaded"
+      ></three-map>
+      <!-- ---------SOS报警--------- -->
+      <alert-box
+        v-model="alertStatus"
+        :twinkle="true"
+        :data="alertData"
+      ></alert-box>
+      <!-- ---------设备仪表报警--------- -->
+      <meter-alarm v-model="meterAlarmStatus" ref="meterAlarm"></meter-alarm>
+    </div>
+  </div>
+</template>
+```
+
+![地图图层](/img/threejs/mapPagesIndex.png "地图图层")
+
 ## map-home-layer.vue
 
 地图底部图层组件，切换各元素的显隐
